@@ -1,15 +1,15 @@
-if (Meteor.isClient) {
-  Template.hello.greeting = function () {
-    return "Welcome to OXide.";
-  };
+docs = new Meteor.Collection('docs')
 
-  Template.hello.events({
-    'click input' : function () {
-      // template data, if any, is available in 'this'
-      if (typeof console !== 'undefined')
-        console.log("You pressed the button");
-    }
-  });
+if (Meteor.isClient) {
+	$(window).load(function() {
+		var url = location.href.split("//")[1].split("/")
+		var ext = url[1]
+		Session.set('sid',ext);
+		var test = docs.findOne({sid:ext})
+		if (!test) {
+			docs.insert({sid:ext})
+		}
+	})
 }
 
 if (Meteor.isServer) {
