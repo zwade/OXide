@@ -1,10 +1,11 @@
 genColors = function(line){
     out = "";
-    for(word in line.split(" ")){
-        if(word in jsScheme){
-            out += '<span style="' + jsStyles[jsScheme[word]] + '">' + word + '</span>';
+    var tmp = line.split(" ");
+    for(word in tmp){
+        if(tmp[word] in jsScheme){
+            out += '<span style="' + jsStyles[jsScheme[tmp[word]]] + '">' + tmp[word] + '</span>';
         } else {
-            out += word;
+            out += tmp[word];
         }
         out += " ";
     }

@@ -47,8 +47,6 @@ if (Meteor.isClient) {
 		$("line").off()
 		$("line").keyup(function(e) {
 			if (e.keyCode!=13) {
-				colors = genColors($(this).html())
-				//$(this).html(colors)
 				var id = docs.findOne({sid:Session.get('sid')})
 				globalCache = id.content || []
 				globalCache[parseInt($(this).attr('num'))] = parse($(this).html())
@@ -62,7 +60,7 @@ if (Meteor.isClient) {
 					//console.log("delete!")
 					var el = removeLine(parseInt($(this).attr('num'))).focus().select()
 					console.log(el)
-					var index = el.html().length
+					var index = el.text().length
 					moveCursor(el,index)
 					e.preventDefault()
 				}
@@ -102,9 +100,57 @@ if (Meteor.isClient) {
 				appendLine(parseInt($(this).attr('num'))+1,"")
 				$($("line")[parseInt($(this).attr('num'))+1]).focus().select()
 				lineBind()
+				var lin = $("line")
+				for (var l = 0; l<lin.length; l++) {
+					$(lin[l]).html(genColors($(lin[l]).text()))
+				}
 				e.preventDefault()
 			}
 		})
+	}
+	/**
+	getProperNode = function(el,index) {
+		if (el.length) {
+			if (el.length>index) {
+				return [true,el,index]
+			} else {
+				return [false,el,index-el.length];
+			}
+		}
+		if (!el.length) {
+			for (i in el.childNodes) {
+				tmp = getProperNode(el.childNodes[i],index)
+				if (tmp[0]) {
+					return [true,tmp[1],tmp[2]]
+				} else {
+					index = tmp[2]
+				}
+			}
+			return [false,el,index]
+		}
+	}**/
+	getProperNode = function(el,index) {
+		if (el.length) {
+			if (index < el.length) {
+				return [el,index]
+			} else {
+				return [el,el.length]
+			}
+		} else {
+			for (iter in el.childNodes) {
+				var obj = el.childNodes[iter]
+				if (obj.childNodes && obj.childNodes[0]) {
+					obj = obj.childNodes[0]
+				}
+				if (obj.length>index) {
+					return [obj,index]
+				} else {
+					index -= obj.length
+				}
+			}
+			var tmp = el.childNodes
+			return [tmp[tmp.length-1],tmp[tmp.length-1].length]
+		}
 	}
 	moveCursor = function(el,index) {
 		if (el[0].childNodes.length==0) {
@@ -112,8 +158,11 @@ if (Meteor.isClient) {
 			return
 		}
 		var range = rangy.createRange();
+		console.log(el[0].childNodes)
 		globr = el[0]
-		range.setStart(el[0].childNodes[0], index);
+		tmp = getProperNode(el[0],index)
+		console.log("Node ->"+tmp)
+		range.setStart(tmp[0], tmp[1]);
 		range.collapse(true);
 		var sel = rangy.getSelection();
 		sel.setSingleRange(range);
@@ -127,6 +176,7 @@ if (Meteor.isClient) {
 		var lin  = $("line").toArray()
 		for (iter in lin) {
 			$(lin[iter]).attr("num",iter)
+			$(lin[iter]).attr("id","field"+iter)
 		}
 		return $($("line")[i-1])
 	}
@@ -142,6 +192,7 @@ if (Meteor.isClient) {
 		var lin  = $("line").toArray()
 		for (iter in lin) {
 			$(lin[iter]).attr("num",iter)
+			$(lin[iter]).attr("id","field"+iter)
 		}
 		return $("#field"+i)
 	}
