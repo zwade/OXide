@@ -23,6 +23,12 @@ if (Meteor.isClient) {
 			docs.insert({sid:ext,content:[""]})
 		}
 	})
+	$(window).load(function() {
+		$("#play").click(function() {
+			var win=window.open(location.href+"?run", '_blank');
+			win.focus();
+		})
+	})
 	Meteor.autorun(function() {
 		if (Session.get('edit')=='splash') {
 			$(document.body).html(Template.splash())
