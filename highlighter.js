@@ -13,7 +13,7 @@ jsReg = new RegExp(matchRegexStr, "g");
 
 matchRegexStr = '(//.*)|(".[^"]*"?")|(\'.[^\']*\'?)|';
     
-for(keyword in jsScheme){
+for(keyword in j7Scheme){
     keyword = keyword.replace(/\+|\*|\||\^|\?/g, function(match){return "\\" + match;});
     if(/[a-z]/.test(keyword)){
         matchRegexStr += "(\\b" + keyword + "\\b)|";
@@ -26,7 +26,7 @@ j7Reg = new RegExp(matchRegexStr, "g");
 
 matchRegexStr = '(//.*)|(".[^"]*"?")|(\'.[^\']*\'?)|';
     
-for(keyword in jsScheme){
+for(keyword in cpScheme){
     keyword = keyword.replace(/\+|\*|\||\^|\?/g, function(match){return "\\" + match;});
     if(/[a-z]/.test(keyword)){
         matchRegexStr += "(\\b" + keyword + "\\b)|";
@@ -36,6 +36,19 @@ for(keyword in jsScheme){
 }
 
 cpReg = new RegExp(matchRegexStr, "g");
+
+matchRegexStr = '(//.*)|(".[^"]*"?")|(\'.[^\']*\'?)|';
+    
+for(keyword in ccScheme){
+    keyword = keyword.replace(/\+|\*|\||\^|\?/g, function(match){return "\\" + match;});
+    if(/[a-z]/.test(keyword)){
+        matchRegexStr += "(\\b" + keyword + "\\b)|";
+    } else {
+        matchRegexStr += "(" + keyword + ")|";
+    }
+}
+
+ccReg = new RegExp(matchRegexStr, "g");
 
 matchRegexStr = '(#.*)|(".[^"]*"?")|(\'.[^\']*\'?)|';
     
@@ -55,7 +68,6 @@ commentDelimiters = {
     "py":"#",
     "j7":"/",
     "cp":"/",
-    "c#":"/",
     "cc":"/"
 };
 
