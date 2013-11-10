@@ -171,15 +171,10 @@ if (Meteor.isClient) {
         });
     }
     
-    langcodes = {
-        "JavaScript":"js",
-        "Python 3.3.2":"py"
-    };
-    
 	showColors = function() {
 		var lin = $("line")
        	                 for (var l = 0; l<lin.length; l++) {
-                         $(lin[l]).html(genColors($(lin[l]).text(),langcodes[$("select").val())])
+                         $(lin[l]).html(genColors($(lin[l]).text(),$("select").val()));
                 }
 	}
 

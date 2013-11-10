@@ -1,0 +1,67 @@
+<!-- javascript and css -->
+
+
+
+<!-- end javascript and css -->
+<body>
+{{>header}}
+{{>pad}}
+{{>file-browser}}
+{{>footer}}
+{{>options}}
+</body>
+
+<template name="header">
+    <div class="header oneline">
+        <span class="title">{ 0x1DE }</span>
+        <span class="filepath">&gt; {{sid}}</span>
+    </div>
+</template>
+
+<template name="options">
+    <div class="options">
+    <select>
+        <option value="js">Javascript</option>
+        <option value="py">Python 3.3.2</option>
+    </select>
+    <img src='/icons-01.png' id = 'tab'></img>
+    <img src='/icons-02.png' id = 'untab'></img>
+    <img src='/icons-03.png' id = 'check'></img>
+    <img src='/icons-05.png' id = 'new'></img>
+    <img src='/icons-06.png' id = 'play'></img>
+    <img src='/icons-07.png' id = 'lock'></img>
+    </div>
+</template>
+
+<template name="file-browser">
+    <div class="file-browser code">
+            <div id='lb'>
+        {{loginButtons}}
+        </div>
+                
+    </div>
+</template>
+
+<template name="pad">
+    <div class="pad code">
+        <div class="text-wrap">
+            {{>line}}
+        </div>
+    </div>
+    <div id="linenumbers">
+
+    </div>
+    <div class="line-number-divider"></div>
+</template>
+
+<template name="line">
+    <div class="line">
+            <div id = "content"></div>
+    </div>
+</template>
+
+<template name="footer">
+    <div class="footer">
+        <span class="footer">Created by Matthew Savage, Kyle Herndon, Zach Wade, and David Lanman &middot; Powered by Meteor &middot; Fonts provided by TypeKit</span>
+    </div>
+</template>
