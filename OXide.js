@@ -38,10 +38,6 @@ if (Meteor.isClient) {
 		return Meteor.users.find({"profile.active":Session.get('sid')})
 	}
 	$(window).load(function() {
-		$("#but").click(function() {
-		        var win=window.open(Session.get('domain')+"/"+$("#newone").val(), '_blank');
-			win.focus()
-		})
 		$(window).on("beforeunload",function() {
 			Meteor.users.update({_id:Meteor.user()._id}, {$set:{"profile.active": ""}})
 		})
@@ -98,6 +94,9 @@ if (Meteor.isClient) {
 		})
 				
 		$("#play").click(function() {
+			if (Session.get("window")=="people") {
+				$("#swap").click()
+			}
 			run()
 		})
 		$("#tab").click(function() {
@@ -108,6 +107,9 @@ if (Meteor.isClient) {
 	Meteor.autorun(function() {
 		if (Session.get('edit')=='splash') {
 			$(document.body).html(Template.splash())
+			$("#but").click(function() {
+			        location.href = "http://"+Session.get('domain')+"/"+$("#newone").val()
+			})
 		}
 	})
 	Meteor.autorun(function() {
