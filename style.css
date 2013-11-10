@@ -34,7 +34,20 @@ div.header {
 .code {
     font-family: ubuntu-mono, monospace;
 }
-
+#lb {
+	text-align:center;
+}
+.login-link-text {
+	color: #DDD;
+}
+#login-buttons {
+	width: calc(100% - 20px);
+}
+#login-dropdown-list {
+	width: 100%;
+	left: -3px;
+	top: 0px;
+}
 html {
 	height:100%;
 }
