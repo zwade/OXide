@@ -4,6 +4,12 @@ span.title, #slog {
     color: #4488FF;
     padding-right: 20px;
 }
+#chooseyourblade {
+	margin-bottom:10px;
+	position: relative;
+	top: -10px;
+	left: -6px;
+}
 #slog {
 	text-align: center;
 	font-size: 150px;
@@ -23,6 +29,7 @@ span.title, #slog {
 line {
 	color: #ddd;
 	white-space:pre;
+	position: relative;
 	margin-bottom:5px;
 }
 .out {
