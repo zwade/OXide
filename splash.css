@@ -4,8 +4,14 @@
 	background-color: rgba(200,200,200,.8);
 	position: absolute;
 	padding: 20px;
+	margin-bottom:20px;
 	border-radius:8px;
 	left: calc(50% - 200px);
 	top: 100px;
 }
 
+#spict {
+	width:360px;
+	height:360px;
+	background-image:url('pict.png');
+}
