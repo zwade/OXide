@@ -6,7 +6,7 @@ span.title {
 }
 #linenumbers {
 	position: absolute;
-	top: 179px;
+	top: 113px;
 	left:290px;
 	text-align:right;
 }
@@ -133,14 +133,14 @@ div.footer {
 
 div.pad {
     width: calc(100% - 290px);
-    height: calc(100% - 204px);
+    height: calc(100% - 136px);
     border: 1px #DDD solid;
     background: #222;
     padding: 4px;
     margin-left:4px;
     position:absolute;
     border-radius: 4px;
-    top: 164px;
+    top: 98px;
     left: 270px;
     display: block;
 }
@@ -183,11 +183,11 @@ div.code-input {
 
 div.line-number-divider {
     width: 0px;
-    height: calc(100% - 195px);
+    height: calc(100% - 127px);
     border-right: 1px #DDD solid;
     position: absolute;
     left: 320px;
-    top: 164px;
+    top: 98px;
 }
 
 div.text-wrap {
@@ -197,14 +197,14 @@ div.text-wrap {
 
 div.file-browser {
     width: 250px;
-    height: calc(100% - 204px);
+    height: calc(100% - 136px);
     left: 10px;
     border: 1px #DDD solid;
     background: #222;
     padding: 4px 0px 4px 4px;
     border-radius: 4px;
     display: block;
-    top: 164px;
+    top: 98px;
     position: absolute;
 }
 
