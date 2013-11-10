@@ -6,7 +6,7 @@ span.title {
 }
 #linenumbers {
 	position: absolute;
-	top: 115px;
+	top: 179px;
 	left:290px;
 	text-align:right;
 }
@@ -73,6 +73,11 @@ div.options {
     border-radius: 4px;
     border: 1px #DDD solid;
     background: #000000;
+    position: absolute;
+    left: 10px;
+    top: 50px;
+    width: calc(100% - 38px);
+    display: block;
 }
 
 div.options span {
@@ -128,14 +133,14 @@ div.footer {
 
 div.pad {
     width: calc(100% - 290px);
-    height: calc(100% - 140px);
+    height: calc(100% - 204px);
     border: 1px #DDD solid;
     background: #222;
     padding: 4px;
     margin-left:4px;
     position:absolute;
     border-radius: 4px;
-    top: 100px;
+    top: 164px;
     left: 270px;
     display: block;
 }
@@ -178,11 +183,11 @@ div.code-input {
 
 div.line-number-divider {
     width: 0px;
-    height: calc(100% - 130px);
+    height: calc(100% - 195px);
     border-right: 1px #DDD solid;
     position: absolute;
     left: 320px;
-    top: 100px;
+    top: 164px;
 }
 
 div.text-wrap {
@@ -192,14 +197,14 @@ div.text-wrap {
 
 div.file-browser {
     width: 250px;
-    height: calc(100% - 140px);
-    top: 100px;
+    height: calc(100% - 204px);
     left: 10px;
     border: 1px #DDD solid;
     background: #222;
     padding: 4px 0px 4px 4px;
     border-radius: 4px;
     display: block;
+    top: 164px;
     position: absolute;
 }
 
