@@ -5,29 +5,42 @@ if (Meteor.isClient) {
 		var url = location.href.split("//")[1].split("/")
 		var stuff = url[1].split("?")
 		var ext = stuff[0]
+		Session.set('sid',ext)
 		if (stuff[1] && stuff[1]=='run') {
 			Session.set('edit','run')
+		} else if (stuff[1] && stuff[1]=='burn') {
+			console.log('huh')
+			var id = docs.findOne({sid:Session.get('sid')})
+			docs.update(id._id, {$set:{content:[""],uid:Session.get('uid'),change:parseInt($(this).attr('num'))}})
 		} else {
 			Session.set('edit','edit')
 		}
-		Session.set('sid',ext);
 		var test = docs.findOne({sid:ext})
 		if (!test) {
 			docs.insert({sid:ext,content:[""]})
 		}
 	})
-	/**
-	Template.pad.content = function() {
-		return Session.get('content')
-	}**/
+	Template.pad.opt = function() {
+		return Session.get('linenumbers')
+	}
 	Meteor.autorun(function() {
 		if (Session.get('sid') && Session.get('edit')=='edit') {
+			console.log('blah')
 			var tmp = docs.findOne({sid:Session.get('sid')})
 			if (tmp.uid!=Session.get('uid')) {
 				var lines = $("line")
 				if (lines.length==tmp.content.length) {
 					$(lines[tmp.change]).html(tmp.content[tmp.change])
 					//console.log('yeah')
+				} else if (lines.length+1==tmp.content.length) {
+					appendLine(tmp.change,tmp.content[tmp.change],true)
+					lineBind()
+				/**
+				} else if (lines.length-1==tmp.content.length) {
+					removeLine(tmp.change)
+					console.log('deleting line')
+					lineBind()
+				**/
 				} else {
 					$("#content").html("")
 					for (i in tmp.content) {
@@ -40,11 +53,22 @@ if (Meteor.isClient) {
 
 		}
 	})
-	genColors = function(str) {
-		return str
-	}
+	Meteor.autorun(function() {
+		if (Session.get('sid') && Session.get('edit')=='edit') {
+			var ln = []
+			var tmp = docs.findOne({sid:Session.get('sid')})
+			for (i = 0; i < tmp.content.length; i++) {
+				ln.push(i)
+			}
+			//Session.set('linenumbers',ln)
+		}
+	})
 	lineBind = function() {
 		$("line").off()
+		$("line").blur(function() {
+			console.log('blur')
+			//moveCursor(Session.get('element'),Session.get('position'))
+		})
 		$("line").keyup(function(e) {
 			if (e.keyCode!=13) {
 				var id = docs.findOne({sid:Session.get('sid')})
@@ -52,9 +76,17 @@ if (Meteor.isClient) {
 				globalCache[parseInt($(this).attr('num'))] = parse($(this).text())
 				docs.update(id._id, {$set:{content:globalCache,uid:Session.get('uid'),change:parseInt($(this).attr('num'))}})
 			}
+			if (e.keyCode == 8) {
+				Session.set('bksphelp',true)
+				console.log('bksp up')
+			}
 		})
 		$("line").keydown(function(e) {
-			if (e.keyCode == 8) {
+			Session.set("position",getSelection().getRangeAt(0).startOffset)
+			Session.set("element",$(this).attr('id'))
+			if (e.keyCode == 8 && Session.get('bksphelp')) {
+				console.log('bkspdown')
+				Session.set('bksphelp',false)
 				//console.log($(this))
 				if (!$(this).text()) {
 					//console.log("delete!")
@@ -104,6 +136,7 @@ if (Meteor.isClient) {
 				for (var l = 0; l<lin.length; l++) {
 					$(lin[l]).html(genColors($(lin[l]).text()))
 				}
+				console.log('wat')
 				e.preventDefault()
 			}
 		})
@@ -172,7 +205,7 @@ if (Meteor.isClient) {
 		var id = docs.findOne({sid:Session.get('sid')})
 		globalCache = id.content || []
 		globalCache.splice(i,1)
-		docs.update(id._id, {$set:{content:globalCache,uid:Session.get('uid'),change:'*'}})
+		docs.update(id._id, {$set:{content:globalCache,uid:Session.get('uid'),change:i}})
 		var lin  = $("line").toArray()
 		for (iter in lin) {
 			$(lin[iter]).attr("num",iter)
@@ -188,7 +221,7 @@ if (Meteor.isClient) {
 		if (!notdo) {
 			globalCache.splice(i,0,"")
 		}
-		docs.update(id._id, {$set:{content:globalCache,uid:Session.get('uid'),change:'*'}})
+		docs.update(id._id, {$set:{content:globalCache,uid:Session.get('uid'),change:i}})
 		var lin  = $("line").toArray()
 		for (iter in lin) {
 			$(lin[iter]).attr("num",iter)

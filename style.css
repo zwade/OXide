@@ -4,6 +4,13 @@ span.title {
     color: #4488FF;
     padding-right: 20px;
 }
+#linenumbers {
+	position: absolute;
+}
+.number {
+	color: #ddd;
+	font-family: monospace;
+}
 line {
 	color: #ddd;
 	white-space:pre;
