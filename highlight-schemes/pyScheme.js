@@ -66,29 +66,44 @@ pyScheme = {
     "for":2,       
     "lambda":2,   
     "try":2,
+    
+    "int":3,
+    "float":3,
+    "long":3,
+    "boolean":3,
+    "None":3,
+    "type":3,
+    "complex":3,
+    "str":3,
+    "unicode":3,
+    "tuple":3,
+    "list":3,
+    "dict":3,
+    "set":3.
 
-    "(":3,
-    ")":3,
-    "{":3,
-    "}":3,
-    "[":3,
-    "]":3,
+    "(":4,
+    ")":4,
+    "{":4,
+    "}":4,
+    "[":4,
+    "]":4,
     
-    "true":4,
-    "false":4,
+    "True":5,
+    "False":5,
     
-    "sqString":5,
-    "dqString":5,
+    "sqString":6,
+    "dqString":6,
     
-    "linCom":6
+    "linCom":7
 }
 
 pyStyles = {
     0:"font-weight:600;color:#004400;",
     1:"font-weight:600;",
     2:"font-weight:600;color:#0000FF;",
-    3:"font-weight:600;",
-    4:"color:#0000FF",
-    5:"color:#00FF00",
-    6:"color:#888888;text-decoration:italic;"
+    3:"font-weight:600;color:#0044DD;",
+    4:"font-weight:600;",
+    5:"color:#0000FF",
+    6:"color:#00FF00",
+    7:"color:#888888;text-decoration:italic;"
 }

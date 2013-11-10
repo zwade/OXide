@@ -11,6 +11,19 @@ for(keyword in jsScheme){
 
 jsReg = new RegExp(matchRegexStr, "g");
 
+matchRegexStr = '(//.*)|(".[^"]*"?")|(\'.[^\']*\'?)|';
+    
+for(keyword in jsScheme){
+    keyword = keyword.replace(/\+|\*|\||\^|\?/g, function(match){return "\\" + match;});
+    if(/[a-z]/.test(keyword)){
+        matchRegexStr += "(\\b" + keyword + "\\b)|";
+    } else {
+        matchRegexStr += "(" + keyword + ")|";
+    }
+}
+
+j7Reg = new RegExp(matchRegexStr, "g");
+
 matchRegexStr = '(#.*)|(".[^"]*"?")|(\'.[^\']*\'?)|';
     
 for(keyword in pyScheme){
@@ -26,22 +39,26 @@ pyReg = new RegExp(matchRegexStr, "g");
 
 regex = {
     "js":jsReg,
-    "py":pyReg
+    "py":pyReg,
+    "j7":j7Reg
 };
 
 schema = {
     "js":jsScheme,
-    "py":pyScheme
+    "py":pyScheme,
+    "j7":j7Scheme
 };
 
 styles = {
     "js":jsStyles,
-    "py":pyStyles
+    "py":pyStyles,
+    "j7":j7Styles
 };
 
 commentDelimiters = {
     "js":"/",
-    "py":"#"
+    "py":"#",
+    "j7":"/"
 };
 
 genColors = function(line, lang){
