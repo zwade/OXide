@@ -153,7 +153,7 @@ if (Meteor.isClient) {
 	showColors = function() {
 		var lin = $("line")
        	                 for (var l = 0; l<lin.length; l++) {
-                         $(lin[l]).html(genColors($(lin[l]).text()))
+                         $(lin[l]).html(genColors($(lin[l]).text(),"js"))
                 }
 	}
 
