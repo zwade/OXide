@@ -49,14 +49,14 @@ if (Meteor.isClient) {
 			if (e.keyCode!=13) {
 				var id = docs.findOne({sid:Session.get('sid')})
 				globalCache = id.content || []
-				globalCache[parseInt($(this).attr('num'))] = parse($(this).html())
+				globalCache[parseInt($(this).attr('num'))] = parse($(this).text())
 				docs.update(id._id, {$set:{content:globalCache,uid:Session.get('uid'),change:parseInt($(this).attr('num'))}})
 			}
 		})
 		$("line").keydown(function(e) {
 			if (e.keyCode == 8) {
 				//console.log($(this))
-				if (!$(this).html()) {
+				if (!$(this).text()) {
 					//console.log("delete!")
 					var el = removeLine(parseInt($(this).attr('num'))).focus().select()
 					console.log(el)
@@ -230,7 +230,7 @@ if (Meteor.isClient) {
 				script+=globalCache[i]+"\n"
 			}
 			script = "<script>\nOXIDE_STARTUP = function() {"+script+"}\n</script>"
-			//console.log(script)
+			console.log(script)
 			$(document).append(script)
 			document.body.innerHTML = ""
 			console = new nConsole()
@@ -259,7 +259,7 @@ if (Meteor.isClient) {
 	}
 
 	insertTextAtCursor = function(text,parentE) {
-		var sel, range, html;
+		var sel, range, childNodeshtml;
 		if (window.getSelection) {
 			sel = window.getSelection();
 			if (sel.getRangeAt && sel.rangeCount) {
