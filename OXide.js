@@ -28,6 +28,9 @@ if (Meteor.isClient) {
 			var win=window.open(location.href+"?run", '_blank');
 			win.focus();
 		})
+		$("#tab").click(function() {
+			console.log(getSelection().getRangeAt(0))
+		})
 	})
 	Meteor.autorun(function() {
 		if (Session.get('edit')=='splash') {
@@ -64,7 +67,6 @@ if (Meteor.isClient) {
 				drawNums()
 				
 			}
-
 		}
 	})
 	drawNums = function() {
