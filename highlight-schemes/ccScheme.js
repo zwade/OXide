@@ -1,4 +1,4 @@
-ccScheme = {
+cpScheme = {
     "+":1,
     "-":1,
     "*":1,

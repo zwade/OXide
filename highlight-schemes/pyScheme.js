@@ -99,5 +99,6 @@ pyStyles = {
     3:"font-weight:600;",
     4:"color:#0077FF",
     5:"color:#00FF00",
-    6:"color:#888888;text-decoration:italic;"
+    6:"color:#FF0000",
+    7:"color:#888888;text-decoration:italic;"
 }
