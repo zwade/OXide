@@ -45,6 +45,7 @@ j7Scheme = {
     "double":2,
     "char":2,
     "boolean":2,
+    "void":2,
 
     "abstract":3,
     "continue":3,	

@@ -13,7 +13,7 @@ jsReg = new RegExp(matchRegexStr, "g");
 
 matchRegexStr = '(//.*)|(".[^"]*"?")|(\'.[^\']*\'?)|';
     
-for(keyword in jsScheme){
+for(keyword in j7Scheme){
     keyword = keyword.replace(/\+|\*|\||\^|\?/g, function(match){return "\\" + match;});
     if(/[a-z]/.test(keyword)){
         matchRegexStr += "(\\b" + keyword + "\\b)|";
@@ -23,6 +23,32 @@ for(keyword in jsScheme){
 }
 
 j7Reg = new RegExp(matchRegexStr, "g");
+
+matchRegexStr = '(//.*)|(".[^"]*"?")|(\'.[^\']*\'?)|';
+    
+for(keyword in cpScheme){
+    keyword = keyword.replace(/\+|\*|\||\^|\?/g, function(match){return "\\" + match;});
+    if(/[a-z]/.test(keyword)){
+        matchRegexStr += "(\\b" + keyword + "\\b)|";
+    } else {
+        matchRegexStr += "(" + keyword + ")|";
+    }
+}
+
+cpReg = new RegExp(matchRegexStr, "g");
+
+matchRegexStr = '(//.*)|(".[^"]*"?")|(\'.[^\']*\'?)|';
+    
+for(keyword in ccScheme){
+    keyword = keyword.replace(/\+|\*|\||\^|\?/g, function(match){return "\\" + match;});
+    if(/[a-z]/.test(keyword)){
+        matchRegexStr += "(\\b" + keyword + "\\b)|";
+    } else {
+        matchRegexStr += "(" + keyword + ")|";
+    }
+}
+
+ccReg = new RegExp(matchRegexStr, "g");
 
 matchRegexStr = '(#.*)|(".[^"]*"?")|(\'.[^\']*\'?)|';
     
@@ -37,45 +63,29 @@ for(keyword in pyScheme){
 
 pyReg = new RegExp(matchRegexStr, "g");
 
-regex = {
-    "js":jsReg,
-    "py":pyReg,
-    "j7":j7Reg
-};
-
-schema = {
-    "js":jsScheme,
-    "py":pyScheme,
-    "j7":j7Scheme
-};
-
-styles = {
-    "js":jsStyles,
-    "py":pyStyles,
-    "j7":j7Styles
-};
-
 commentDelimiters = {
     "js":"/",
     "py":"#",
-    "j7":"/"
+    "j7":"/",
+    "cp":"/",
+    "cc":"/"
 };
 
 genColors = function(line, lang){
-    line = line.replace(regex[lang], function(match){
+    line = line.replace(window[lang + "Reg"], function(match){
         if(match == ""){
             return "";
         }
         if(match.charAt(0) == "'"){
-            return '<span style="' + styles[lang][schema[lang]["sqString"]] + '">' + match + '</span>';
+            return '<span style="' + window[lang + "Styles"][window[lang + "Scheme"]["sqString"]] + '">' + match + '</span>';
         }
         if(match.charAt(0) == '"'){
-            return '<span style="' + styles[lang][schema[lang]["dqString"]] + '">' + match + '</span>';
+            return '<span style="' + window[lang + "Styles"][window[lang + "Scheme"]["dqString"]] + '">' + match + '</span>';
         }
         if(match.charAt(0) == commentDelimiters[lang]){
-            return '<span style="' + styles[lang][schema[lang]["linCom"]] + '">' + match + '</span>';
+            return '<span style="' + window[lang + "Styles"][window[lang + "Scheme"]["linCom"]] + '">' + match + '</span>';
         }
-        return '<span style="' + styles[lang][schema[lang][match]] + '">' + match + '</span>';
+        return '<span style="' + window[lang + "Styles"][window[lang + "Scheme"][match]] + '">' + match + '</span>';
     });
     
     return line;
