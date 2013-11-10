@@ -190,7 +190,8 @@ if (Meteor.isClient) {
 				//console.log('bkspdown')
 				Session.set('bksphelp',false)
 				//console.log($(this))
-				if (!$(this).text()) {
+				if (!$(this).text() && $(this).attr('num')!="0") {
+					console.log($(this).attr('num'))
 					//console.log("delete!")
 					var el = removeLine(parseInt($(this).attr('num'))).focus().select()
 					//console.log(el)

@@ -107,10 +107,10 @@ j7Scheme = {
 
 j7Styles = {
     1:"font-weight:600;color:#008800;",
-    2:"font-weight:600;color:#0000FF;",
-    3:"font-weight:600;",
-    4:"color:#0000FF",
+    2:"font-weight:600;color:#551A8B;",
+    3:"font-weight:600;color:#0044DD",
+    4:"font-weight:600;",
     5:"color:#0044DD",
-    5:"color:#00DD00",
-    6:"color:#888888;font-style:italic"
+    6:"color:#00DD00",
+    7:"color:#888888;font-style:italic"
 }

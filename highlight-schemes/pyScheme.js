@@ -28,7 +28,6 @@ pyScheme = {
     "<<":0,
     ">>":0,
 
-
     "is":1,
     "and":1,
     "not":1,
@@ -93,11 +92,12 @@ pyScheme = {
 }
 
 pyStyles = {
-    0:"font-weight:600;color:#004400;",
-    1:"font-weight:600;",
-    2:"font-weight:600;color:#0077FF;",
-    3:"font-weight:600;",
-    4:"color:#0077FF",
-    5:"color:#00FF00",
-    6:"color:#888888;text-decoration:italic;"
+    0:"font-weight:600;color:#008800;",
+    1:"font-weight:600;color:#DD0000;",
+    2:"font-weight:600;color:#0044DD;",
+    3:"font-weight:600;color:#551A8B;",
+    4:"font-weight:600;",
+    5:"font-weight:600;color:#0044DD;",
+    6:"color:#00DD00",
+    7:"color:#888888;text-decoration:italic;"
 }
