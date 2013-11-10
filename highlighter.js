@@ -1,9 +1,7 @@
 matchRegexStr = '(//.*)|(".[^"]*"?")|(\'.[^\']*\'?)|';
     
 for(keyword in jsScheme){
-    alert(keyword);
     keyword = keyword.replace(/\+|\*|\||\^|\?/g, function(match){return "\\" + match;});
-    alert(keyword);
     if(/[a-z]/.test(keyword)){
         matchRegexStr += "(\\b" + keyword + "\\b)|";
     } else {
