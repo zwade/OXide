@@ -20,9 +20,6 @@ if (Meteor.isClient) {
 			docs.insert({sid:ext,content:[""]})
 		}
 	})
-	Template.pad.opt = function() {
-		return Session.get('linenumbers')
-	}
 	Meteor.autorun(function() {
 		if (Session.get('sid') && Session.get('edit')=='edit') {
 			console.log('blah')
@@ -134,7 +131,7 @@ if (Meteor.isClient) {
 				lineBind()
 				var lin = $("line")
 				for (var l = 0; l<lin.length; l++) {
-					$(lin[l]).html(genColors($(lin[l]).text()))
+					//$(lin[l]).html(genColors($(lin[l]).text()))
 				}
 				console.log('wat')
 				e.preventDefault()
