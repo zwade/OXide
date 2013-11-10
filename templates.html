@@ -14,7 +14,7 @@
 <template name="header">
     <div class="header oneline">
         <span class="title">{OXide}</span>
-        <span class="filepath">src &gt; filename.ext</span>
+        <span class="filepath">OxIDE &gt; {{sid}}</span>
     </div>
 </template>
 
@@ -43,9 +43,6 @@
         </div>
     </div>
     <div id="linenumbers">
-    {{#each opt}}
-    	<div class='number'>{{this}}</div>
-    {{/each}}
 
     </div>
     <div class="line-number-divider"></div>

@@ -50,7 +50,17 @@ if (Meteor.isClient) {
 
 		}
 	})
-	Meteor.autorun(function() {
+	drawNums = function() {
+		var tmp = $("#linenumbers")
+		tmp.html("")
+		for (i=0; i < Session.get('content').length; i++) {
+			tmp.append("<div id=num"+i+" class='number'>"+i+"</div>")
+		}
+	}
+	Template.header.sid = function() {
+		return Session.get('sid')
+	}
+	Deps.autorun(function() {
 		if (Session.get('sid') && Session.get('edit')=='edit') {
 			var ln = []
 			var tmp = docs.findOne({sid:Session.get('sid')})
@@ -250,7 +260,7 @@ if (Meteor.isClient) {
 		}
 
 	})
-	Meteor.autorun(function() {
+	Deps.autorun(function() {
 		if (Session.get('edit')=='run' && !Session.get('hasrun') && Session.get('sid')) {
 			Session.set('hasrun',true)
 			script = ""
