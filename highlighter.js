@@ -3,7 +3,7 @@ genColors = function(line){
     matchRegexStr = '(//.*)|(".[^"]*"?")|(\'.[^\']*\'?)|';
     
     for(keyword in jsScheme){
-        //matchRegexStr += "(\\b" + keyword + "\\b)|";
+        matchRegexStr += "(\\b" + keyword + "\\b)|";
     }
     
     line = line.replace(new RegExp(matchRegexStr.substr(0, matchRegexStr.length-1), "g"), function(match){

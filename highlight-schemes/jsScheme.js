@@ -1,5 +1,5 @@
-var jsScheme = {
-   /* "\\+":1,
+jsScheme = {
+    "\\+":1,
     "-":1,
     "\\*":1,
     "/":1,
@@ -37,7 +37,7 @@ var jsScheme = {
     "!":1,
     ",":1,
     
-    "\\?":2, */
+    "\\?":2, 
     "break":2,
     "const":2,
     "continue":2,
@@ -84,7 +84,7 @@ var jsScheme = {
     "linCom":6
 }
 
-var jsStyles = {
+jsStyles = {
     1:"font-weight:600;color:#004400;",
     2:"font-weight:600;color:#0000FF;",
     3:"font-weight:600;",
