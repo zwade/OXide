@@ -4,6 +4,19 @@ span.title, #slog {
     color: #4488FF;
     padding-right: 20px;
 }
+.ouser {
+	color: #DDD;
+}
+#swap {
+	width:100%;
+	height:50px;
+	margin: -2px;
+	position: absolute;
+	margin:-4px;
+	font-size: 20px;
+	bottom:2px;
+	bottom: 3px;
+}
 #chooseyourblade {
 	margin-bottom:10px;
 	position: relative;

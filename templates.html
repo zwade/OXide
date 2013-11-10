@@ -6,7 +6,7 @@
 <body>
 {{>header}}
 {{>pad}}
-{{>file-browser}}
+{{>filebrowser}}
 {{>footer}}
 {{>options}}
 </body>
@@ -34,13 +34,21 @@
     </div>
 </template>
 
-<template name="file-browser">
+<template name="filebrowser">
     <div class="file-browser code">
             <div id='lb'>
         {{loginButtons}}
         </div>
 	<br><br>
-	<div id='logger'></div>
+	<div id='logger' style="display:none"></div>
+	<div id='friends'>
+	{{#each people}}
+	<span class='ouser'>{{this.emails.0.address}}</span>
+	<br>
+	{{/each}}
+	
+	</div>
+	<button id='swap'>People</button>
                 
     </div>
 </template>

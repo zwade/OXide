@@ -20,12 +20,17 @@
 	font-family: monospace;
 }
 #newone {
+	margin-top:40px;
 	width: 240px;
 	height:75px;
+	font-size:20px;
+	
 }
 #but {
+	margin-top:40px;
 	width: 120px;
-	height:75px;
+	height:80px;
+	font-size:20px;
 }
 #text {
 	font-size: 24px;

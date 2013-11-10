@@ -1,9 +1,19 @@
 docs = new Meteor.Collection('docs')
 
+
 if (Meteor.isClient) {
+	Meteor.subscribe('users',function() {
+		var url = location.href.split("//")[1].split("/")
+	        var stuff = url[1].split("?")
+	        var ext = stuff[0]
+		Session.set('sid',ext)
+									
+		Meteor.users.update({_id:Meteor.user()._id}, {$set:{"profile.active": ext}})
+	})
 	Meteor.subscribe('docs',function() {
 		var url = location.href.split("//")[1].split("/")
 		Session.set('domain',url[0])
+		Session.set('window','people')
 		var stuff = url[1].split("?")
 		var ext = stuff[0]
 		Session.set('sid',ext)
@@ -24,7 +34,30 @@ if (Meteor.isClient) {
 			docs.insert({sid:ext,content:["main = function() {"]})
 		}
 	})
+	Template.filebrowser.people = function() {
+		return Meteor.users.find({"profile.active":Session.get('sid')})
+	}
 	$(window).load(function() {
+		$("#but").click(function() {
+		        var win=window.open(Session.get('domain')+"/"+$("#newone").val(), '_blank');
+			win.focus()
+		})
+		$(window).on("beforeunload",function() {
+			Meteor.users.update({_id:Meteor.user()._id}, {$set:{"profile.active": ""}})
+		})
+		$("#swap").click(function() {
+			if (Session.get('window')=='people') {
+				Session.set('window','console')
+				$("#swap").html("Console")
+				$("#logger").css("display","block")
+				$("#friends").css("display","none")
+			} else {
+				Session.set('window','people')
+				$("#swap").html("People")
+				$("#logger").css("display","none")
+				$("#friends").css("display","block")
+			}
+		})
 		$("#chooseyourblade").change(function() {
 			showColors()
 		})
@@ -408,4 +441,8 @@ if (Meteor.isServer) {
   Meteor.publish('docs',function() {
   	return docs.find()
   })
+  Meteor.publish("users", function () {
+      //You might want to alter this depending on what you want to send down
+        return Meteor.users.find();
+  });
 }
