@@ -29,6 +29,7 @@ span.title, #slog {
 line {
 	color: #ddd;
 	white-space:pre;
+	position: relative;
 	margin-bottom:5px;
 }
 .out {

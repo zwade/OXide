@@ -28,6 +28,14 @@ if (Meteor.isClient) {
 		$("#chooseyourblade").change(function() {
 			showColors()
 		})
+		$("#untab").click(function() {
+			$("line").css("left","0px")
+		})
+		$("#tab").click(function() {
+			if (!Session.get('locked')) {
+				$("line").css("left","40px")
+			}
+		})
 		$("#new").click(function() {
 			console.log(Session.get('domain')+"/"+Math.floor(Math.random()*1000))
 			var win=window.open(Session.get('domain')+"/"+Math.floor(Math.random()*10000), '_blank');
