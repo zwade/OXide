@@ -5,27 +5,20 @@
 <!-- end javascript and css -->
 <body>
 {{>header}}
-{{>options}}
-{{>file-browser}}
 {{>pad}}
+{{>file-browser}}
 {{>footer}}
 </body>
 
 <template name="header">
     <div class="header oneline">
-        <span class="title">{OXide}</span>
+        <span class="title">{OxIDE}</span>
         <span class="filepath">OxIDE &gt; {{sid}}</span>
     </div>
 </template>
 
 <template name="options">
     <div class="options">
-        <img class="button" src="/folder.png" />
-        <img class="button" src="/file.png" />
-        <img class="button" src="/github.png" />
-        <img class="button" src="/indent.png" />
-        <img class="button" src="/unindent.png" />
-        <img class="button" src="/syntax-check.png" />
         <img class="button" src="/run.png" />
     </div>
 </template>

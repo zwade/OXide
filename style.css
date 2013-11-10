@@ -6,7 +6,7 @@ span.title {
 }
 #linenumbers {
 	position: absolute;
-	top: 93px;
+	top: 115px;
 	left:290px;
 	text-align:right;
 }
@@ -28,6 +28,7 @@ line {
 }
 div.header {
     padding-bottom: 4px;
+    height:100px;
 }
 
 .code {
@@ -52,12 +53,12 @@ span.filepath {
 }
 
 div.options {
-    height: 20px;
+    height: 100px;
     padding: 2px 0px 2px 20px;
     margin-bottom: 2px;
     padding-bottom: 4px;
     border-radius: 4px;
-    border: 1px #8C7300 solid;
+    border: 1px #DDD solid;
     background: #000000;
 }
 
@@ -113,15 +114,17 @@ div.footer {
 }
 
 div.pad {
-    width: calc(100% - 286px);
-    height: calc(100% - 110px);
-    border: 1px #8C7300 solid;
-    background: #000000;
+    width: calc(100% - 290px);
+    height: calc(100% - 140px);
+    border: 1px #DDD solid;
+    background: #222;
     padding: 4px;
     margin-left:4px;
     position:absolute;
     border-radius: 4px;
-    display: inline-block;
+    top: 100px;
+    left: 270px;
+    display: block;
 }
 
 div.line-numbers {
@@ -162,12 +165,11 @@ div.code-input {
 
 div.line-number-divider {
     width: 0px;
-    height: calc(100% - 100px);
-    margin-top: -8px;
-    border-right: 1px #8C7300 solid;
-    position: relative;
-    left: 300px;
-    top: calc(-100% + 105px);
+    height: calc(100% - 130px);
+    border-right: 1px #DDD solid;
+    position: absolute;
+    left: 320px;
+    top: 100px;
 }
 
 div.text-wrap {
@@ -177,12 +179,15 @@ div.text-wrap {
 
 div.file-browser {
     width: 250px;
-    height: calc(100% - 110px);
-    border: 1px #8C7300 solid;
-    background: #000000;
+    height: calc(100% - 140px);
+    top: 100px;
+    left: 10px;
+    border: 1px #DDD solid;
+    background: #222;
     padding: 4px 0px 4px 4px;
     border-radius: 4px;
-    display: inline-block;
+    display: block;
+    position: absolute;
 }
 
 div.line {
