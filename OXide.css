@@ -1,1 +1,6 @@
 /* CSS declarations go here */
+line {
+	display: block;
+	outline: 0px solid transparent;
+	font-family: monospace;
+}
