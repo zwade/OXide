@@ -79,7 +79,7 @@ pyScheme = {
     "tuple":3,
     "list":3,
     "dict":3,
-    "set":3.
+    "set":3,
 
     "(":4,
     ")":4,
@@ -100,19 +100,9 @@ pyScheme = {
 pyStyles = {
     0:"font-weight:600;color:#004400;",
     1:"font-weight:600;",
-<<<<<<< HEAD
     2:"font-weight:600;color:#0077FF;",
     3:"font-weight:600;",
     4:"color:#0077FF",
     5:"color:#00FF00",
     6:"color:#888888;text-decoration:italic;"
 }
-=======
-    2:"font-weight:600;color:#0000FF;",
-    3:"font-weight:600;color:#0044DD;",
-    4:"font-weight:600;",
-    5:"color:#0000FF",
-    6:"color:#00FF00",
-    7:"color:#888888;text-decoration:italic;"
-}
->>>>>>> 3902f80bdc62da2f565a7830c5bec28920da4020

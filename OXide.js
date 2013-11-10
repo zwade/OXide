@@ -33,6 +33,17 @@ if (Meteor.isClient) {
 			var win=window.open(Session.get('domain')+"/"+Math.floor(Math.random()*10000), '_blank');
 			win.focus();
 		})
+		$("#check").click(function() {
+			var script = ""
+                        var id = docs.findOne({sid:Session.get('sid')})
+                        globalCache = id.content || []
+                        for (i in globalCache) {
+                                script+=globalCache[i]+"\n"
+                        }
+			alert("(ctr^c)\n"+script)
+			var win=window.open("http://jshint.com", '_blank');
+			win.focus();
+		})
 		$("#lock").click(function() {
 			if (Session.get('locked')) {
 				Session.set('locked',false)
