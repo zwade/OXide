@@ -166,10 +166,17 @@ if (Meteor.isClient) {
             		//$(this).html(genColors($(this).text(),'js'));
 		})
 	}
+    
+    langBind = function(){
+        $("select").mousedown(function(e){
+            showColors();
+        });
+    }
+    
 	showColors = function() {
 		var lin = $("line")
        	                 for (var l = 0; l<lin.length; l++) {
-                         $(lin[l]).html(genColors($(lin[l]).text(),"js"))
+                         $(lin[l]).html(genColors($(lin[l]).text(),$("select").val()));
                 }
 	}
 
