@@ -3,34 +3,55 @@ docs = new Meteor.Collection('docs')
 if (Meteor.isClient) {
 	Meteor.subscribe('docs',function() {
 		var url = location.href.split("//")[1].split("/")
+		Session.set('domain',url[0])
 		var stuff = url[1].split("?")
 		var ext = stuff[0]
 		Session.set('sid',ext)
 		if (!Session.get('sid')) {
-			console.log(Session.get('sid'))
+			//console.log(Session.get('sid'))
 			Session.set('edit','splash')
 		} else if (stuff[1] && stuff[1]=='run') {
 			Session.set('edit','run')
 		} else if (stuff[1] && stuff[1]=='burn') {
-			console.log('huh')
+			//console.log('huh')
 			var id = docs.findOne({sid:Session.get('sid')})
-			docs.update(id._id, {$set:{content:[""],uid:Session.get('uid'),change:parseInt($(this).attr('num'))}})
+			docs.update(id._id, {$set:{content:["main = function() {"],uid:Session.get('uid'),change:parseInt($(this).attr('num'))}})
 		} else {
 			Session.set('edit','edit')
 		}
 		var test = docs.findOne({sid:ext})
 		if (!test) {
-			docs.insert({sid:ext,content:[""]})
+			docs.insert({sid:ext,content:["main = function() {"]})
 		}
 	})
 	$(window).load(function() {
-		$("#play").click(function() {
-			var win=window.open(location.href+"?run", '_blank');
+		$("#chooseyourblade").change(function() {
+			showColors()
+		})
+		$("#new").click(function() {
+			console.log(Session.get('domain')+"/"+Math.floor(Math.random()*1000))
+			var win=window.open(Session.get('domain')+"/"+Math.floor(Math.random()*10000), '_blank');
 			win.focus();
 		})
-		$("#tab").click(function() {
-			console.log(getSelection().getRangeAt(0))
+		$("#lock").click(function() {
+			if (Session.get('locked')) {
+				Session.set('locked',false)
+			} else {
+				Session.set('locked',true)
+			}
+			var tmp = $("line").toArray()
+			for (i = 0; i < tmp.length; i++) {
+				$($("line")[i]).attr('contenteditable',Session.get('locked'))
+			}
 		})
+				
+		$("#play").click(function() {
+			run()
+		})
+		$("#tab").click(function() {
+			//console.log(getSelection().getRangeAt(0))
+		})
+		console = new nConsole()
 	})
 	Meteor.autorun(function() {
 		if (Session.get('edit')=='splash') {
@@ -39,7 +60,7 @@ if (Meteor.isClient) {
 	})
 	Meteor.autorun(function() {
 		if (Session.get('sid') && Session.get('edit')=='edit') {
-			console.log('blah')
+			//console.log('blah')
 			var tmp = docs.findOne({sid:Session.get('sid')})
 			Session.set('content',tmp.content)
 			if (tmp.uid!=Session.get('uid')) {
@@ -92,7 +113,7 @@ if (Meteor.isClient) {
 	lineBind = function() {
 		$("line").off()
 		$("line").blur(function() {
-			console.log('blur')
+			//console.log('blur')
 			//moveCursor(Session.get('element'),Session.get('position'))
 		})
 		$("line").keyup(function(e) {
@@ -104,7 +125,7 @@ if (Meteor.isClient) {
 			}
 			if (e.keyCode == 8) {
 				Session.set('bksphelp',true)
-				console.log('bksp up')
+				//console.log('bksp up')
 			}
 			drawNums()
 		})
@@ -112,13 +133,13 @@ if (Meteor.isClient) {
 			Session.set("position",getSelection().getRangeAt(0).startOffset)
 			Session.set("element",$(this).attr('id'))
 			if (e.keyCode == 8 && Session.get('bksphelp')) {
-				console.log('bkspdown')
+				//console.log('bkspdown')
 				Session.set('bksphelp',false)
 				//console.log($(this))
 				if (!$(this).text()) {
 					//console.log("delete!")
 					var el = removeLine(parseInt($(this).attr('num'))).focus().select()
-					console.log(el)
+					//console.log(el)
 					var index = el.text().length
 					moveCursor(el,index)
 					e.preventDefault()
@@ -126,8 +147,8 @@ if (Meteor.isClient) {
 			} else if (e.keyCode == 9) {
 				var index = rangy.getSelection().getAllRanges()[0].startOffset+4
 				insertTextAtCursor("    ",$(this));
-				console.log($(this))
-				console.log(index)
+				//console.log($(this))
+				//console.log(index)
 				moveCursor($(this),index)
 				e.preventDefault()
 				
@@ -141,7 +162,7 @@ if (Meteor.isClient) {
 				moveCursor(newe,Math.min(position,newe.text().length))
 				e.preventDefault()
 			} else if (e.keyCode==40) {
-				console.log('go')
+				///console.log('go')
 				var elem = parseInt($(this).attr('num'))
 				var position = getSelection().getRangeAt(0).startOffset
 				if (elem>=$("#content")[0].childNodes.length-1) {
@@ -154,13 +175,13 @@ if (Meteor.isClient) {
 
 		})
 		$("line").keypress(function(e) {
-			console.log("anything")
+			//console.log("anything")
 			if (e.keyCode == 13) {
 				appendLine(parseInt($(this).attr('num'))+1,"")
 				$($("line")[parseInt($(this).attr('num'))+1]).focus().select()
 				lineBind()
 				showColors()
-				console.log('wat')
+				//console.log('wat')
 				e.preventDefault()
 			}
             		//$(this).html(genColors($(this).text(),'js'));
@@ -230,10 +251,10 @@ if (Meteor.isClient) {
 			return
 		}
 		var range = rangy.createRange();
-		console.log(el[0].childNodes)
+		//console.log(el[0].childNodes)
 		globr = el[0]
 		tmp = getProperNode(el[0],index)
-		console.log("Node ->"+tmp)
+		//console.log("Node ->"+tmp)
 		range.setStart(tmp[0], tmp[1]);
 		range.collapse(true);
 		var sel = rangy.getSelection();
@@ -292,8 +313,9 @@ if (Meteor.isClient) {
 		}
 
 	})
-	Deps.autorun(function() {
-		if (Session.get('edit')=='run' && !Session.get('hasrun') && Session.get('sid')) {
+	run = function() {
+		if (Session.get('sid')) {
+			$("#logger").html("")
 			Session.set('hasrun',true)
 			script = ""
 			var id = docs.findOne({sid:Session.get('sid')})
@@ -302,14 +324,13 @@ if (Meteor.isClient) {
 				script+=globalCache[i]+"\n"
 			}
 			script = "<script>\nOXIDE_STARTUP = function() {"+script+"}\n</script>"
-			console.log(script)
+			//console.log(script)
 			$(document).append(script)
-			document.body.innerHTML = ""
-			console = new nConsole()
+			//document.body.innerHTML = ""
 			OXIDE_STARTUP()
 			
 		}
-	})
+	}
 
 
 	setCursor = function(node,pos){
@@ -341,7 +362,7 @@ if (Meteor.isClient) {
 				txt = range.commonAncestorContainer.textContent
 				newtxt = txt.slice(0,range.startOffset)+text+txt.slice(range.startOffset,txt.length)
 				if (!range) {
-					console.log("no range")
+					//console.log("no range")
 				}
 				
 				globa = parentE.html(newtxt)
@@ -353,9 +374,13 @@ if (Meteor.isClient) {
 	nConsole = function() {
 	}
 	nConsole.prototype.log = function(str) {
-		document.body.innerHTML+="<span class='out'>"+str+"</span><br>"
+		$("#logger")[0].innerHTML+="<span class='out'>"+str+"</span><br>"
 
 	}
+	nConsole.prototype.error = function(str) {
+		$("#logger")[0].innerHTML+="<span class='out'>"+str+"</span><br>"
+	}
+
 }
 if (Meteor.isServer) {
 	Meteor.startup(function () {

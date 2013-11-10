@@ -86,9 +86,9 @@ pyScheme = {
 pyStyles = {
     0:"font-weight:600;color:#004400;",
     1:"font-weight:600;",
-    2:"font-weight:600;color:#0000FF;",
+    2:"font-weight:600;color:#0077FF;",
     3:"font-weight:600;",
-    4:"color:#0000FF",
+    4:"color:#0077FF",
     5:"color:#00FF00",
     6:"color:#888888;text-decoration:italic;"
 }
