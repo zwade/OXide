@@ -24,9 +24,14 @@ for(keyword in pyScheme){
 
 pyReg = new RegExp(matchRegexStr, "g");
 
-schema = {
+regex = {
     "js":jsReg,
     "py":pyReg
+};
+
+schema = {
+    "js":jsScheme,
+    "py":pyScheme
 };
 
 styles = {
@@ -37,10 +42,10 @@ styles = {
 commentDelimiters = {
     "js":"//",
     "py":"#"
-}
+};
 
 genColors = function(line, lang){
-    line = line.replace(jsReg, function(match){
+    line = line.replace(regex[lang], function(match){
         if(match == ""){
             return "";
         }
