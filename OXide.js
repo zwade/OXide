@@ -6,7 +6,8 @@ if (Meteor.isClient) {
 		var stuff = url[1].split("?")
 		var ext = stuff[0]
 		Session.set('sid',ext)
-		if (ext=="") {
+		if (!Session.get('sid')) {
+			console.log(Session.get('sid'))
 			Session.set('edit','splash')
 		} else if (stuff[1] && stuff[1]=='run') {
 			Session.set('edit','run')
@@ -23,7 +24,7 @@ if (Meteor.isClient) {
 		}
 	})
 	Meteor.autorun(function() {
-		if (Session.get('edit')) {
+		if (Session.get('edit')=='splash') {
 			$(document.body).html(Template.splash())
 		}
 	})
@@ -52,8 +53,8 @@ if (Meteor.isClient) {
 						appendLine(i,tmp.content[i],true)
 					}
 					lineBind()
+					showColors()
 				}
-				showColors()
 				drawNums()
 				
 			}
@@ -154,7 +155,7 @@ if (Meteor.isClient) {
 				console.log('wat')
 				e.preventDefault()
 			}
-            //$(this).html(genColors($(this).text()));
+            		//$(this).html(genColors($(this).text(),'js'));
 		})
 	}
     
