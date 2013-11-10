@@ -1,0 +1,11 @@
+<head>
+  <title>OXide</title>
+</head>
+
+<body>
+	<div id='content'></div>
+</body>
+
+<template name="pad">
+	<div style="width:100%;height:100%" contenteditable id='boo' num='0'></div>
+</template>

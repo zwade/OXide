@@ -4,7 +4,16 @@ span.title {
     color: #4488FF;
     padding-right: 20px;
 }
-
+line {
+	color: #ddd;
+	white-space:pre;
+}
+.out {
+	font-size:14px;
+	color: #ddd;
+	margin: 4px;
+	font-family: monospace;
+}
 div.header {
     padding-bottom: 4px;
 }
@@ -13,11 +22,15 @@ div.header {
     font-family: ubuntu-mono, monospace;
 }
 
+html {
+	height:100%;
+}
 body {
     height: 100%;
     overflow-y: hidden;
     background: #111111;
     padding-bottom: 10px;
+    
 }
 
 span.filepath {
@@ -88,11 +101,13 @@ div.footer {
 }
 
 div.pad {
-    width: calc(80% - 4px);
+    width: calc(100% - 286px);
     height: calc(100% - 110px);
     border: 1px #8C7300 solid;
     background: #000000;
     padding: 4px;
+    margin-left:4px;
+    position:absolute;
     border-radius: 4px;
     display: inline-block;
 }
@@ -135,12 +150,12 @@ div.code-input {
 
 div.line-number-divider {
     width: 0px;
-    height: calc(100% - 101px);
-    margin-top: -4px;
+    height: calc(100% - 100px);
+    margin-top: -8px;
     border-right: 1px #8C7300 solid;
     position: relative;
-    left: calc(20% + 19px);
-    bottom: calc(100% - 100px);
+    left: 300px;
+    top: calc(-100% + 105px);
 }
 
 div.text-wrap {
@@ -149,7 +164,7 @@ div.text-wrap {
 }
 
 div.file-browser {
-    width: calc(20% - 16px);
+    width: 250px;
     height: calc(100% - 110px);
     border: 1px #8C7300 solid;
     background: #000000;
@@ -160,4 +175,9 @@ div.file-browser {
 
 div.line {
     height: 20px;
+
+}
+#content {
+	margin-left:50px;
+	margin-top:10px;
 }

@@ -59,6 +59,8 @@ if (Meteor.isClient) {
 					window.getSelection().addRange(2)
 					e.preventDefault()
 				}
+			} else if (e.keyCode == 9) {
+				
 			}
 
 		})
@@ -135,6 +137,7 @@ if (Meteor.isClient) {
 			script = "<script>\nOXIDE_STARTUP = function() {"+script+"}\n</script>"
 			console.log(script)
 			$(document).append(script)
+			document.body.innerHTML = ""
 			console = new nConsole()
 			OXIDE_STARTUP()
 			
@@ -144,29 +147,42 @@ if (Meteor.isClient) {
 
 	setCursor = function(node,pos){
 		var node = (typeof node == "string" || node instanceof String) ? document.getElementById(node) : node;
-			if(!node){
-				return false;
-			}else if(node.createTextRange){
-				var textRange = node.createTextRange();
-				textRange.collapse(true);
-				textRange.moveEnd(pos);
-				textRange.moveStart(pos);
-				textRange.select();
-				return true;
-			}else if(node.setSelectionRange){
-				node.setSelectionRange(pos,pos);
-				return true;
-			}
+		if(!node){
 			return false;
+		}else if(node.createTextRange){
+			var textRange = node.createTextRange();
+			textRange.collapse(true);
+			textRange.moveEnd(pos);
+			textRange.moveStart(pos);
+			textRange.select();
+			return true;
+		}else if(node.setSelectionRange){
+			node.setSelectionRange(pos,pos);
+			return true;
+		}
+		return false;
+	}
+
+	function insertTextAtCursor(text) {
+		var sel, range, html;
+		if (window.getSelection) {
+			sel = window.getSelection();
+			if (sel.getRangeAt && sel.rangeCount) {
+				range = sel.getRangeAt(0);
+				range.deleteContents();
+				range.insertNode( document.createTextNode(text) );
+			}
+		} else if (document.selection && document.selection.createRange) {
+			document.selection.createRange().text = text;
 		}
 	}
 	nConsole = function() {
 	}
 	nConsole.prototype.log = function(str) {
-		document.body.innerHTML+=str+"<br>"
+		document.body.innerHTML+="<span class='out'>"+str+"</span><br>"
 
 	}
-
+}
 if (Meteor.isServer) {
 	Meteor.startup(function () {
     // code to run on server at startup

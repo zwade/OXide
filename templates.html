@@ -1,11 +1,15 @@
 <!-- javascript and css -->
 
-<script>var __adobewebfontsappname__ = "code"</script>
-<script src="http://use.edgefonts.net/actor:n4:all;medula-one:n4:all;source-code-pro:n9,n7,n2,n3,n4,n6,n5:all;ubuntu-mono:n7,i7,n4,i4:all.js"></script>
 
-<link rel="stylesheet" type="text/css" href="style.css" />
 
 <!-- end javascript and css -->
+<body>
+{{>header}}
+{{>options}}
+{{>file-browser}}
+{{>pad}}
+{{>footer}}
+</body>
 
 <template name="header">
     <div class="header oneline">
@@ -16,13 +20,13 @@
 
 <template name="options">
     <div class="options">
-        <img class="button" src="images/folder.png" />
-        <img class="button" src="images/file.png" />
-        <img class="button" src="images/github.png" />
-        <img class="button" src="images/indent.png" />
-        <img class="button" src="images/unindent.png" />
-        <img class="button" src="images/syntax-check.png" />
-        <img class="button" src="images/run.png" />
+        <img class="button" src="/folder.png" />
+        <img class="button" src="/file.png" />
+        <img class="button" src="/github.png" />
+        <img class="button" src="/indent.png" />
+        <img class="button" src="/unindent.png" />
+        <img class="button" src="/syntax-check.png" />
+        <img class="button" src="/run.png" />
     </div>
 </template>
 
@@ -35,7 +39,7 @@
 <template name="pad">
     <div class="pad code">
         <div class="text-wrap">
-            {{lines}}
+            {{>line}}
         </div>
     </div>
     <div class="line-number-divider"></div>
@@ -43,9 +47,7 @@
 
 <template name="line">
     <div class="line">
-        <div class="edit-dot fl code np">&bull;</div>
-        <div class="line-number fl code np">3</div>
-        <div class="code-input fl code">letsTalk("no_shutup");</div>
+    	<div id = "content"></div>
     </div>
 </template>
 
