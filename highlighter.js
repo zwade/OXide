@@ -1,12 +1,20 @@
-genColors = function(line){
-    //all the things
-    matchRegexStr = '(//.*)|(".[^"]*"?")|(\'.[^\']*\'?)|';
+matchRegexStr = '(//.*)|(".[^"]*"?")|(\'.[^\']*\'?)|';
     
-    for(keyword in jsScheme){
+for(keyword in jsScheme){
+    alert(keyword);
+    keyword = keyword.replace(/\+|\*|\||\^|\?/g, function(match){return "\\" + match;});
+    alert(keyword);
+    if(/[a-z]/.test(keyword)){
         matchRegexStr += "(\\b" + keyword + "\\b)|";
+    } else {
+        matchRegexStr += "(" + keyword + ")|";
     }
-    
-    line = line.replace(new RegExp(matchRegexStr.substr(0, matchRegexStr.length-1), "g"), function(match){
+}
+
+matchRegexStr = matchRegexStr.substr(0, matchRegexStr.length-1);
+
+genColors = function(line){
+    line = line.replace(new RegExp(matchRegexStr, "g"), function(match){
         if(match == ""){
             return "";
         }
