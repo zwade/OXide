@@ -86,9 +86,9 @@ jsScheme = {
 
 jsStyles = {
     1:"font-weight:600;color:#008800;",
-    2:"font-weight:600;color:#0000DD;",
+    2:"font-weight:600;color:#0000FF;",
     3:"font-weight:600;",
-    4:"color:#0000DD",
+    4:"color:#0000FF",
     5:"color:#00DD00",
     6:"color:#888888;font-style:italic"
 }

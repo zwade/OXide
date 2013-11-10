@@ -142,11 +142,10 @@ if (Meteor.isClient) {
 			if (e.keyCode == 13) {
 				appendLine(parseInt($(this).attr('num'))+1,"")
 				$($("line")[parseInt($(this).attr('num'))+1]).focus().select()
-				lineBind()
-				showColors()
 				console.log('wat')
 				e.preventDefault()
 			}
+            $(this).html(genColors($(this).text()));
 		})
 	}
 	showColors = function() {
