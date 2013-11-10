@@ -53,8 +53,8 @@ if (Meteor.isClient) {
 						appendLine(i,tmp.content[i],true)
 					}
 					lineBind()
+					showColors()
 				}
-				showColors()
 				drawNums()
 				
 			}
@@ -155,7 +155,7 @@ if (Meteor.isClient) {
 				console.log('wat')
 				e.preventDefault()
 			}
-            //$(this).html(genColors($(this).text()));
+            		//$(this).html(genColors($(this).text(),'js'));
 		})
 	}
 	showColors = function() {

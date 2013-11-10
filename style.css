@@ -1,9 +1,14 @@
-span.title {
+span.title, #slog {
     font-family: medula-one, sans-serif;
     font-size: 36px;
     color: #4488FF;
     padding-right: 20px;
 }
+#slog {
+	text-align: center;
+	font-size: 150px;
+}
+
 #linenumbers {
 	position: absolute;
 	top: 113px;
@@ -113,7 +118,9 @@ img.button:hover {
     border-right: 1px solid #282828;
     border-bottom: 1px solid #282828;
 }
-
+img:active {
+	opacity: .5;
+}
 img.button:active {
     background: #080808;
     border-top: 1px solid #111111;
