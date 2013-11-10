@@ -44,6 +44,8 @@ if (Meteor.isClient) {
 		$("line").off()
 		$("line").keyup(function(e) {
 			if (e.keyCode!=13) {
+				colors = genColors($(this).html())
+				$(this).html(colors)
 				var id = docs.findOne({sid:Session.get('sid')})
 				globalCache = id.content || []
 				globalCache[parseInt($(this).attr('num'))] = parse($(this).html())
@@ -60,6 +62,8 @@ if (Meteor.isClient) {
 					e.preventDefault()
 				}
 			} else if (e.keyCode == 9) {
+				insertTextAtCursor("    ");
+				e.preventDefault()
 				
 			}
 
@@ -163,7 +167,7 @@ if (Meteor.isClient) {
 		return false;
 	}
 
-	function insertTextAtCursor(text) {
+	insertTextAtCursor = function(text) {
 		var sel, range, html;
 		if (window.getSelection) {
 			sel = window.getSelection();
