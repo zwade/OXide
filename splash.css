@@ -1,0 +1,11 @@
+#mainbg {
+	width: 400px;
+	height: 700px;
+	background-color: rgba(200,200,200,.8);
+	position: absolute;
+	padding: 20px;
+	border-radius:8px;
+	left: calc(50% - 200px);
+	top: 100px;
+}
+
