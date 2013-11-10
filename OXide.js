@@ -27,7 +27,7 @@ if (Meteor.isClient) {
 				var lines = $("line")
 				if (lines.length==tmp.content.length) {
 					$(lines[tmp.change]).html(tmp.content[tmp.change])
-					console.log('yeah')
+					//console.log('yeah')
 				} else {
 					$("#content").html("")
 					for (i in tmp.content) {
@@ -40,12 +40,15 @@ if (Meteor.isClient) {
 
 		}
 	})
+	genColors = function(str) {
+		return str
+	}
 	lineBind = function() {
 		$("line").off()
 		$("line").keyup(function(e) {
 			if (e.keyCode!=13) {
 				colors = genColors($(this).html())
-				$(this).html(colors)
+				//$(this).html(colors)
 				var id = docs.findOne({sid:Session.get('sid')})
 				globalCache = id.content || []
 				globalCache[parseInt($(this).attr('num'))] = parse($(this).html())
@@ -54,17 +57,42 @@ if (Meteor.isClient) {
 		})
 		$("line").keydown(function(e) {
 			if (e.keyCode == 8) {
-				console.log($(this))
+				//console.log($(this))
 				if (!$(this).html()) {
-					console.log("delete!")
-					removeLine(parseInt($(this).attr('num'))).focus().select(),1000
-					window.getSelection().addRange(2)
+					//console.log("delete!")
+					var el = removeLine(parseInt($(this).attr('num'))).focus().select()
+					console.log(el)
+					var index = el.html().length
+					moveCursor(el,index)
 					e.preventDefault()
 				}
 			} else if (e.keyCode == 9) {
-				insertTextAtCursor("    ");
+				var index = rangy.getSelection().getAllRanges()[0].startOffset+4
+				insertTextAtCursor("    ",$(this));
+				console.log($(this))
+				console.log(index)
+				moveCursor($(this),index)
 				e.preventDefault()
 				
+			} else if (e.keyCode==38) {
+				var elem = parseInt($(this).attr('num'))
+				var position = getSelection().getRangeAt(0).startOffset
+				if (elem<=0) {
+					return
+				}
+				var newe = $("#field"+(elem-1))
+				moveCursor(newe,Math.min(position,newe.text().length))
+				e.preventDefault()
+			} else if (e.keyCode==40) {
+				console.log('go')
+				var elem = parseInt($(this).attr('num'))
+				var position = getSelection().getRangeAt(0).startOffset
+				if (elem>=$("#content")[0].childNodes.length-1) {
+					return
+				}
+				var newe = $("#field"+(elem+1))
+				moveCursor(newe,Math.min(position,newe.text().length))
+				e.preventDefault()
 			}
 
 		})
@@ -77,6 +105,14 @@ if (Meteor.isClient) {
 				e.preventDefault()
 			}
 		})
+	}
+	moveCursor = function(el,index) {
+		var range = rangy.createRange();
+		globr = el[0]
+		range.setStart(el[0].childNodes[0], index);
+		range.collapse(true);
+		var sel = rangy.getSelection();
+		sel.setSingleRange(range);
 	}
 	removeLine = function(i) {
 		$($("line")[i]).remove()
@@ -94,7 +130,7 @@ if (Meteor.isClient) {
 		$("#content").insertAt(i,"<line style='width:100%;height:100%' contenteditable id='field"+i+"' num='"+i+"'>"+content+"</line>")
 		var id = docs.findOne({sid:Session.get('sid')})
 		globalCache = id.content || []
-		console.log(globalCache)
+		//console.log(globalCache)
 		if (!notdo) {
 			globalCache.splice(i,0,"")
 		}
@@ -139,7 +175,7 @@ if (Meteor.isClient) {
 				script+=globalCache[i]+"\n"
 			}
 			script = "<script>\nOXIDE_STARTUP = function() {"+script+"}\n</script>"
-			console.log(script)
+			//console.log(script)
 			$(document).append(script)
 			document.body.innerHTML = ""
 			console = new nConsole()
@@ -167,14 +203,21 @@ if (Meteor.isClient) {
 		return false;
 	}
 
-	insertTextAtCursor = function(text) {
+	insertTextAtCursor = function(text,parentE) {
 		var sel, range, html;
 		if (window.getSelection) {
 			sel = window.getSelection();
 			if (sel.getRangeAt && sel.rangeCount) {
 				range = sel.getRangeAt(0);
 				range.deleteContents();
-				range.insertNode( document.createTextNode(text) );
+				glob = range
+				txt = range.commonAncestorContainer.textContent
+				newtxt = txt.slice(0,range.startOffset)+text+txt.slice(range.startOffset,txt.length)
+				if (!range) {
+					console.log("no range")
+				}
+				
+				globa = parentE.html(newtxt)
 			}
 		} else if (document.selection && document.selection.createRange) {
 			document.selection.createRange().text = text;
