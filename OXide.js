@@ -24,6 +24,7 @@ if (Meteor.isClient) {
 		if (Session.get('sid') && Session.get('edit')=='edit') {
 			console.log('blah')
 			var tmp = docs.findOne({sid:Session.get('sid')})
+			Session.set('content',tmp.content)
 			if (tmp.uid!=Session.get('uid')) {
 				var lines = $("line")
 				if (lines.length==tmp.content.length) {
@@ -45,6 +46,8 @@ if (Meteor.isClient) {
 					}
 					lineBind()
 				}
+				showColors()
+				drawNums()
 				
 			}
 
@@ -54,7 +57,7 @@ if (Meteor.isClient) {
 		var tmp = $("#linenumbers")
 		tmp.html("")
 		for (i=0; i < Session.get('content').length; i++) {
-			tmp.append("<div id=num"+i+" class='number'>"+i+"</div>")
+			tmp.append("<div id=num"+i+" class='number'>"+(i+1)+"</div>")
 		}
 	}
 	Template.header.sid = function() {
@@ -87,6 +90,7 @@ if (Meteor.isClient) {
 				Session.set('bksphelp',true)
 				console.log('bksp up')
 			}
+			drawNums()
 		})
 		$("line").keydown(function(e) {
 			Session.set("position",getSelection().getRangeAt(0).startOffset)
@@ -139,15 +143,19 @@ if (Meteor.isClient) {
 				appendLine(parseInt($(this).attr('num'))+1,"")
 				$($("line")[parseInt($(this).attr('num'))+1]).focus().select()
 				lineBind()
-				var lin = $("line")
-				for (var l = 0; l<lin.length; l++) {
-					$(lin[l]).html(genColors($(lin[l]).text()))
-				}
+				showColors()
 				console.log('wat')
 				e.preventDefault()
 			}
 		})
 	}
+	showColors = function() {
+		var lin = $("line")
+       	                 for (var l = 0; l<lin.length; l++) {
+                         $(lin[l]).html(genColors($(lin[l]).text()))
+                }
+	}
+
 	/**
 	getProperNode = function(el,index) {
 		if (el.length) {

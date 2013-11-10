@@ -6,14 +6,19 @@ span.title {
 }
 #linenumbers {
 	position: absolute;
+	top: 93px;
+	left:290px;
+	text-align:right;
 }
 .number {
 	color: #ddd;
 	font-family: monospace;
+	margin-bottom: 5px;
 }
 line {
 	color: #ddd;
 	white-space:pre;
+	margin-bottom:5px;
 }
 .out {
 	font-size:14px;
