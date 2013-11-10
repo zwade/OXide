@@ -6,7 +6,9 @@ if (Meteor.isClient) {
 		var stuff = url[1].split("?")
 		var ext = stuff[0]
 		Session.set('sid',ext)
-		if (stuff[1] && stuff[1]=='run') {
+		if (ext=="") {
+			Session.set('edit','splash')
+		} else if (stuff[1] && stuff[1]=='run') {
 			Session.set('edit','run')
 		} else if (stuff[1] && stuff[1]=='burn') {
 			console.log('huh')
@@ -18,6 +20,11 @@ if (Meteor.isClient) {
 		var test = docs.findOne({sid:ext})
 		if (!test) {
 			docs.insert({sid:ext,content:[""]})
+		}
+	})
+	Meteor.autorun(function() {
+		if (Session.get('edit')) {
+			$(document.body).html(Template.splash())
 		}
 	})
 	Meteor.autorun(function() {
