@@ -107,6 +107,10 @@ if (Meteor.isClient) {
 		})
 	}
 	moveCursor = function(el,index) {
+		if (el[0].childNodes.length==0) {
+			el.focus().select()
+			return
+		}
 		var range = rangy.createRange();
 		globr = el[0]
 		range.setStart(el[0].childNodes[0], index);
