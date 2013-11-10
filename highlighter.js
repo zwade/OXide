@@ -1,28 +1,26 @@
 genColors = function(line){
-    //comments
-    line = line.replace(new RegExp("//.*", "g"), function(match){return '<span style="' + jsStyles[jsScheme["linCom"]] + '">' + match + '</span>';});
+    //all the things
+    matchRegexStr = '(//.*)|(".[^"]*"?")|(\'.[^\']*\'?)|';
     
-    //strings
-    line = line.replace(new RegExp('".[^"]*"?"', "g"), function(match){return '<span style="' + jsStyles[jsScheme["dqString"]] + '">' + match + '</span>';});
-    
-    line = line.replace(new RegExp("'.[^']*'?", "g"), function(match){return '<span style="' + jsStyles[jsScheme["sqString"]] + '">' + match + '</span>';});
-    
-    //all the rest
     for(keyword in jsScheme){
-        line = line.replace(keyword, '<span style="' + jsStyles[jsScheme[keyword]] + '">' + keyword + '</span>');
+        matchRegexStr += "(\\b" + keyword + "\\b)|";
     }
-    return line
-}
-/**
-    out = "";
-    var tmp = line.split(" ");
-    for(word in tmp){
-        if(tmp[word] in jsScheme){
-            out += '<span style="' + jsStyles[jsScheme[tmp[word]]] + '">' + tmp[word] + '</span>';
-        } else {
-            out += tmp[word];
+    
+    line = line.replace(new RegExp(matchRegexStr.substr(0, matchRegexStr.length-1), "g"), function(match){
+        if(match == ""){
+            return "";
         }
-        out += " ";
-    }
-    return out.substr(0, out.length-1);
-}**/
+        if(match.charAt(0) == "'"){
+            return '<span style="' + jsStyles[jsScheme["sqString"]] + '">' + match + '</span>';
+        }
+        if(match.charAt(0) == '"'){
+            return '<span style="' + jsStyles[jsScheme["dqString"]] + '">' + match + '</span>';
+        }
+        if(match.charAt(0) == "/"){
+            return '<span style="' + jsStyles[jsScheme["linCom"]] + '">' + match + '</span>';
+        }
+        return '<span style="' + jsStyles[jsScheme[match]] + '">' + match + '</span>';
+    });
+    
+    return line;
+}
