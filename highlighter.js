@@ -1,12 +1,14 @@
 genColors = function(line){
-    out = "";
-    for(word in line.split(" ")){
-        if(word in jsScheme){
-            out += '<span style="' + jsStyles[jsScheme[word]] + '">' + word + '</span>';
-        } else {
-            out += word;
-        }
-        out += " ";
+    //comments
+    line.replace(new RegExp("//.*", "g"), function(match){return '<span style="' + jsStyles[jsScheme["linCom"]] + '">' + match + '</span>';});
+    
+    //strings
+    line.replace(new RegExp('".[^"]*"?"', "g"), function(match){return '<span style="' + jsStyles[jsScheme["dqString"]] + '">' + match + '</span>';});
+    
+    line.replace(new RegExp("'.[^']*'?", "g"), function(match){return '<span style="' + jsStyles[jsScheme["sqString"]] + '">' + match + '</span>';});
+    
+    //all the rest
+    for(keyword in jsScheme){
+        line.replace(keyword, '<span style="' + jsStyles[jsScheme[keyword]] + '">' + keyword + '</span>');
     }
-    return out.substr(0, out.length-1);
 }
