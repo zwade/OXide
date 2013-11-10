@@ -40,7 +40,7 @@ styles = {
 };
 
 commentDelimiters = {
-    "js":"//",
+    "js":"/",
     "py":"#"
 };
 
